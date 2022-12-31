@@ -1,0 +1,21 @@
+name: mirror
+on:
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: mirror site
+        shell: bash
+        run: |
+          mkdir site && cd site
+          echo test > index.html
+          wget -mpkE https://rosettacode.org/
+          cd ..
+          tar -zcvf site.tar.gz site
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: site.tar.gz
