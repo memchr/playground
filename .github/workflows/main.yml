@@ -7,6 +7,7 @@ on:
 
 jobs:
   mirror:
+    timeout-minutes: 720
     runs-on: ubuntu-latest
     steps:
       - name: zimit
