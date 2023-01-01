@@ -1,6 +1,8 @@
 name: pkgbuild
 on:
   push:
+    paths:
+      - ".github/workflows/pkgbuild.yml"
   workflow_dispatch:
 
 jobs:
