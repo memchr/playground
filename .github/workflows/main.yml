@@ -3,7 +3,6 @@ on:
   push:
   workflow_dispatch:
 
-
 jobs:
   mirror:
     runs-on: ubuntu-latest
@@ -11,7 +10,4 @@ jobs:
       - name: test
         shell: bash
         run: |
-          lscpu
-          free -m
-          df -h
-
+          ls /usr/bin/docker
