@@ -11,4 +11,7 @@ jobs:
       - name: test
         shell: bash
         run: |
-          echo hello
+          lscpu
+          free -m
+          df -h
+
