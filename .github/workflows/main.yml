@@ -17,10 +17,10 @@ jobs:
             openzim/zimit zimit \
             --url https://rosettacode.org \
             --name rosettacode \
-            --workers 8 \
+            --workers 2 \
             --waitUntil domcontentloaded \
             --exclude 'User_talk:|Talk:|User:' \
-            --timeLimit 19000
+            --timeLimit 39600
 
       - name: Upload ZIM file
         uses: actions/upload-artifact@v3
