@@ -1,0 +1,24 @@
+name: pkgbuild
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  pkgbuild:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux
+      options: --privileged
+      volumes:
+        - /home/builder:/home/builder
+    steps:
+      - name: test
+        shell: bash
+        run: |
+          pacman
+
+      # - name: Upload ZIM file
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: rosettacode.zim
+      #     path: /output/rosettacode*.zim
