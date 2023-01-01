@@ -17,7 +17,7 @@ jobs:
             --workers 8 \
             --waitUntil domcontentloaded \
             --exclude 'User_talk:|Talk:|User:' \
-            --timeLimit 60
+            --timeLimit 19000
 
       - name: Upload ZIM file
         uses: actions/upload-artifact@v3
