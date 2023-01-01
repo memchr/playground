@@ -7,7 +7,20 @@ jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: test
+      - name: zimit
         shell: bash
         run: |
-          ls /usr/bin/docker
+          docker run -v /output:/output --cap-add=SYS_ADMIN --cap-add=NET_ADMIN --shm-size=1gb \
+            openzim/zimit zimit \
+            --url https://rosettacode.org \
+            --name rosettacode \
+            --workers 8 \
+            --waitUntil domcontentloaded \
+            --exclude 'User_talk:|Talk:|User:' \
+            --timeLimit 60
+
+      - name: Upload ZIM file
+        uses: actions/upload-artifact@v3
+        with:
+          name: rosettacode.zim
+          path: /output/rosettacode.zim
