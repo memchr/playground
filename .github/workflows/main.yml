@@ -13,11 +13,28 @@ jobs:
       - name: prepare
         shell: bash
         run: |
-          sudo apt update
-          sudo apt install python2-dev python2 -y
+          sudo apt-get update
+          sudo apt-get install python2-dev python2 -y
           wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
           sudo python2 get-pip.py
           pip2 install kitchen Requests mwclient lxml
+          wget https://raw.githubusercontent.com/WikiTeam/wikiteam/master/dumpgenerator.py
+
+      - name: dump
+        shell: bash
+        run: |
+          python2 dumpgenerator.py --api=http://rosettacode.org/w/api.php --images --xml --curonly --path rosettacode
+
+      - name: compress
+        shell: bash
+        run: |
+          tar -zcvf rosettacode.tar.gz rosettacode
+
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: rosettacode_dump
+          path: rosettacode.tar.gz
 
   # mirror:
   #   runs-on: ubuntu-latest
