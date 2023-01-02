@@ -14,8 +14,11 @@ jobs:
         shell: bash
         run: |
           sudo apt update
-          sudo apt install python2-dev -y
+          sudo apt install python2-dev python2 -y
+          wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
+          sudo python2 get-pip.py
           pip2 install kitchen Requests mwclient lxml
+
   # mirror:
   #   runs-on: ubuntu-latest
   #   container: openzim/zimit
