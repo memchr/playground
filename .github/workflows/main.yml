@@ -6,24 +6,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  mirror:
-    timeout-minutes: 720
-    runs-on: ubuntu-latest
+  dump:
+    name: dump mediawiki xml
+    runs-on: ubuntu-20.04
     steps:
-      - name: zimit
+      - name: prepare
         shell: bash
         run: |
-          docker run -v /output:/output --cap-add=SYS_ADMIN --cap-add=NET_ADMIN --shm-size=1gb \
-            openzim/zimit zimit \
-            --url https://rosettacode.org \
-            --name rosettacode \
-            --workers 2 \
-            --waitUntil domcontentloaded \
-            --exclude 'User_talk:|Talk:|User:' \
-            --timeLimit 39600
-
-      - name: Upload ZIM file
-        uses: actions/upload-artifact@v3
-        with:
-          name: rosettacode.zim
-          path: /output/rosettacode*.zim
+          whoami
+        
+  # mirror:
+  #   runs-on: ubuntu-latest
+  #   container: openzim/zimit
+  #   steps:
+  #     - name: zimit
+  #       shell: bash
+  #       run: |
+  #           zimit \
+  #           --url https://rosettacode.org \
+  #           --name rosettacode \
+  #           --workers 4 \
+  #           --waitUntil domcontentloaded \
+  #           --exclude 'User_talk:|Talk:|User:|wiki/Special:' \
+  #           --timeLimit 19200
+  #
+  #     - name: Upload ZIM file
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: rosettacode.zim
+  #         path: /output/rosettacode*.zim
