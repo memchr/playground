@@ -13,9 +13,9 @@ jobs:
       - name: prepare
         shell: bash
         run: |
-          whoami
-          pwd
-        
+          sudo apt update
+          sudo apt install python2-dev -y
+          pip2 install kitchen Requests mwclient lxml
   # mirror:
   #   runs-on: ubuntu-latest
   #   container: openzim/zimit
