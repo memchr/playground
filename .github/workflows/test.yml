@@ -1,0 +1,17 @@
+name: mirror
+on:
+  push:
+    paths:
+      - ".github/workflows/test.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: iproute
+        run: |
+          ip a
+      - name: public ip
+        run: |
+          curl -4 cloudflare.com/cdn-cgi/trace
