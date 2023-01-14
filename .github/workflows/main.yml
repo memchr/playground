@@ -1,4 +1,4 @@
-name: mirror
+name: builder
 on:
   push:
     paths:
@@ -27,14 +27,14 @@ jobs:
       - name: create artifact
         working-directory: ./serenity
         run: |
-          tar -zcvf build.tar.gz ./Build
+          gzip -c ./Build/x86_64/_disk_image > disk_image.gz
 
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: ./serenity/build.tar.gz
+          path: ./serenity/disk_image.gz
 
   # mirror:
     # runs-on: ubuntu-latest
