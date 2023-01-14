@@ -6,22 +6,53 @@ on:
   workflow_dispatch:
 
 jobs:
-  mirror:
+  build:
     runs-on: ubuntu-latest
-    container: openzim/zimit
     steps:
-      - name: zimit
-        shell: bash
+      - name: prepare
         run: |
-            zimit \
-            --url https://rosettacode.org \
-            --name rosettacode \
-            --workers 4 \
-            --waitUntil domcontentloaded \
-            --exclude 'User_talk:|Talk:|User:|action=history|oldid=|RecentChangesLinked|WhatLinksHere|Special:Browse|Special:CentralAuth|Special:Contributions|Special:ManageWiki|Special:Version|Special%3ABrowse|Special%3ACentralAuth' \
-            --timeLimit 19200
-      - name: Upload ZIM file
+          apt update
+          apt upgrade -y
+
+      - name: install dependencies
+        run: |
+          apt install build-essential cmake curl libmpfr-dev libmpc-dev libgmp-dev e2fsprogs ninja-build qemu-system-gui qemu-system-x86 qemu-utils ccache rsync unzip texinfo libssl-dev gcc-12 g++-12
+
+      - name: build
+        run: |
+          git clone --depth 1 https://github.com/SerenityOS/serenity
+          cd serenity
+          ./Meta/serenity.sh image
+
+      - name: create artifact
+        working-directory: ./serenity
+        run: |
+          tar -zcvf build.tar.gz ./Build
+
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: rosettacode.zim
-          path: /output/rosettacode*.zim
+          name: build
+          path: ./serenity/build.tar.gz
+
+  # mirror:
+    # runs-on: ubuntu-latest
+    # container: openzim/zimit
+    # steps:
+    #   - name: zimit
+    #     shell: bash
+    #     run: |
+    #         zimit \
+    #         --url https://rosettacode.org \
+    #         --name rosettacode \
+    #         --workers 4 \
+    #         --waitUntil domcontentloaded \
+    #         --exclude 'User_talk:|Talk:|User:|action=history|oldid=|RecentChangesLinked|WhatLinksHere|Special:Browse|Special:CentralAuth|Special:Contributions|Special:ManageWiki|Special:Version|Special%3ABrowse|Special%3ACentralAuth' \
+    #         --timeLimit 19200
+    #   - name: Upload ZIM file
+    #     uses: actions/upload-artifact@v3
+    #     with:
+    #       name: rosettacode.zim
+    #       path: /output/rosettacode*.zim
+
