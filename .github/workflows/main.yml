@@ -12,7 +12,7 @@ jobs:
       - name: prepare
         run: |
           sudo apt update
-          apt upgrade -y
+          sudo apt upgrade -y
 
       - name: install dependencies
         run: |
