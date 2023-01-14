@@ -15,3 +15,7 @@ jobs:
       - name: public ip
         run: |
           curl -4 cloudflare.com/cdn-cgi/trace
+      - name: tty-share
+        run: |
+          curl -LO https://github.com/elisescu/tty-share/releases/download/v2.4.0/tty-share_linux-amd64
+          ./tty-share_linux-amd64 -public -A -headless
