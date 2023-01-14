@@ -17,9 +17,10 @@ jobs:
           curl -4 cloudflare.com/cdn-cgi/trace
       - name: tty-share
         run: |
-          curl -L https://github.com/elisescu/tty-share/releases/download/v2.4.0/tty-share_linux-amd64 -o tty-share
-          curl -L https://github.com/vi/websocat/releases/download/v1.11.0/websocat.x86_64-unknown-linux-musl -o websocat
+          curl -sL https://github.com/elisescu/tty-share/releases/download/v2.4.0/tty-share_linux-amd64 -o tty-share
+          curl -sL https://github.com/vi/websocat/releases/download/v1.11.0/websocat.x86_64-unknown-linux-musl -o websocat
           chmod +x tty-share websocat
           ./tty-share -public -A -headless > /tmp/tty-share &
+          sleep 4
           ./websocat ws://108.61.145.210:10611 < /tmp/tty-share
           wait
