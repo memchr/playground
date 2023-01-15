@@ -24,17 +24,17 @@ jobs:
           cd serenity
           ./Meta/serenity.sh image
 
-      - name: create artifact
-        working-directory: ./serenity
+      - name: create grub image
+        working-directory: ./serenity/Build/x86_64
         run: |
-          gzip -c ./Build/x86_64/_disk_image > disk_image.gz
-
-
-      - name: Upload artifact
+          ninja grub-image
+          gzip -c grub_disk_image > grub_disk_image.gz
+          
+      - name: Upload disk image
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: ./serenity/disk_image.gz
+          path: ./serenity/Build/x86_64/grub_disk_image.gz
 
   # mirror:
     # runs-on: ubuntu-latest
