@@ -11,11 +11,6 @@ jobs:
     container: 
       image: archlinux:base-devel 
     steps:
-      - name: prepare
-        run: |
-          pacman -Syu --noconfirm fd
-          useradd -m runner
-          echo "runner ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
     #   - name: cleanup
     #     run: |
     #       sudo mkdir /empty -p
