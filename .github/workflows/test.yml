@@ -8,9 +8,17 @@ on:
 jobs:
   clean_up_test:
     runs-on: ubuntu-22.04
-    # container: 
-      # image: archlinux:base-devel 
+    container: 
+      image: archlinux:base-devel 
     steps:
+      # - name: prepare arch
+      #   run: |
+      #     pacman -Syu --noconfirm --needed openssh tmate
+      # - name: generate ssh keys
+      #   run: |
+      #     echo -e 'y\n'|ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa
+
+    # steps:
     #   - name: cleanup
     #     run: |
     #       sudo mkdir /empty -p
@@ -25,6 +33,4 @@ jobs:
     #         /opt/hostedtoolcache/CodeQL
     #       )
     #       echo ${_files[@]} | sudo xargs -n1 rsync -a --delete /empty/
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
+     - uses: mxschmitt/action-tmate@v3
