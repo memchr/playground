@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-22.04
     container: 
       image: archlinux:base-devel 
+      options: --privileged
       volumes:
         - /:/host
     steps:
@@ -29,6 +30,6 @@ jobs:
             /usr/share/swift
             /opt/hostedtoolcache/CodeQL
           )
-          for f in ${_files[@]}; echo "/host/${f}"; done | sudo xargs -n1 rsync -a --delete /empty/
+          for f in ${_files[@]}; do echo "/host/${f}"; done | sudo xargs -n1 rsync -a --delete /empty/
       - name: ssh debug
         uses: mxschmitt/action-tmate@v3
