@@ -8,8 +8,8 @@ on:
 jobs:
   clean_up_test:
     runs-on: ubuntu-22.04
-    container: 
-      image: archlinux:base-devel 
+    # container: 
+      # image: archlinux:base-devel 
     steps:
     #   - name: cleanup
     #     run: |
