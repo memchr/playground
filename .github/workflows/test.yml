@@ -15,7 +15,7 @@ jobs:
         run: |
           pacman -Sy archlinux-keyring --needed --noconfirm
           pacman -Syu --noconfirm
-          pacman -S dust
+          pacman -S dust --noconfirm
       - name: disk capacity
         run: df -h
       - name: pwd
