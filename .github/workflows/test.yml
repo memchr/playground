@@ -17,6 +17,10 @@ jobs:
       - name: prepare
         run: |
           pacman -Syu --noconfirm --needed rsync
+      - name: ssh debug
+        uses: mxschmitt/action-tmate@v3
+        with:
+           detached: true
       - name: cleanup
         run: |
           sudo mkdir /empty -p
@@ -31,5 +35,4 @@ jobs:
             /opt/hostedtoolcache/CodeQL
           )
           for f in ${_files[@]}; do echo "/host/${f}"; done | sudo xargs -n1 rsync -a --delete /empty/
-      - name: ssh debug
-        uses: mxschmitt/action-tmate@v3
+
