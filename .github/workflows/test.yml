@@ -26,4 +26,5 @@ jobs:
     #       )
     #       echo ${_files[@]} | sudo xargs -n1 rsync -a --delete /empty/
       - name: Debugging with ssh
-        uses: memchr/action-upterm@v1.1
+
+        uses: memchr/action-upterm@v0.1
