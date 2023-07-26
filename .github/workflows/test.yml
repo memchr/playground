@@ -11,14 +11,5 @@ jobs:
     # container: 
     #     image: archlinux:base-devel
     steps:
-      - name: prepare
-        run: |
-          curl -LO https://github.com/bootandy/dust/releases/download/v0.8.6/du-dust_0.8.6_amd64.deb
-          sudo dpkg -i du-dust_0.8.6_amd64.deb
-      - name: disk capacity
-        run: df -h
-      - name: pwd
-        run: pwd
-      - name: dust
-        run: dust -rbP /
-    
+      - name: Debugging with ssh
+        uses: lhotari/action-upterm@v1
