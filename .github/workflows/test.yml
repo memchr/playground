@@ -13,26 +13,22 @@ jobs:
       volumes:
         - /:/host
     steps:
-      # - name: prepare arch
-      #   run: |
-      #     pacman -Syu --noconfirm --needed openssh tmate
-      # - name: generate ssh keys
-      #   run: |
-      #     echo -e 'y\n'|ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa
-
-    # steps:
-    #   - name: cleanup
-    #     run: |
-    #       sudo mkdir /empty -p
-    #       _files=(
-    #         /usr/local/lib/android
-    #         /usr/local/.ghcup
-    #         /usr/local/share/powershell
-    #         /usr/local/share/chromium
-    #         /usr/local/share/vcpkg
-    #         /usr/share/dotnet
-    #         /usr/share/swift
-    #         /opt/hostedtoolcache/CodeQL
-    #       )
-    #       echo ${_files[@]} | sudo xargs -n1 rsync -a --delete /empty/
-     - uses: mxschmitt/action-tmate@v3
+      - name: prepare
+        run: |
+          pacman -Syu --noconfirm --needed rsync
+      - name: cleanup
+        run: |
+          sudo mkdir /empty -p
+          _files=(
+            /usr/local/lib/android
+            /usr/local/.ghcup
+            /usr/local/share/powershell
+            /usr/local/share/chromium
+            /usr/local/share/vcpkg
+            /usr/share/dotnet
+            /usr/share/swift
+            /opt/hostedtoolcache/CodeQL
+          )
+          for f in ${_files[@]}; echo "/host/${f}"; done | sudo xargs -n1 rsync -a --delete /empty/
+      - name: ssh debug
+        uses: mxschmitt/action-tmate@v3
