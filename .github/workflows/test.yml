@@ -8,17 +8,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-22.04
-    container: 
-        image: archlinux:base-devel
+    # container: 
+    #     image: archlinux:base-devel
     steps:
       - name: prepare
         run: |
-          pacman -Sy archlinux-keyring --needed --noconfirm
-          pacman -Syu --noconfirm
-          pacman -S dust --noconfirm
+          curl -LO https://github.com/bootandy/dust/releases/download/v0.8.6/d
+          dpkg -i du-dust_0.8.6_amd64.deb
       - name: disk capacity
         run: df -h
       - name: pwd
         run: pwd
       - name: dust
-        run: dust /
+        run: dust -rbP /
+    
