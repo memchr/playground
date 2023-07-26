@@ -30,12 +30,6 @@ jobs:
     #         /opt/hostedtoolcache/CodeQL
     #       )
     #       echo ${_files[@]} | sudo xargs -n1 rsync -a --delete /empty/
-      - name: Debugging with ssh
-        uses: memchr/action-upterm@v0.2
-      - name:
-        run: |
-          echo HOME is $HOME
-          ls /
-          ls -al $HOME
-          fd sock$ $HOME /tmp 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
