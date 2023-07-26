@@ -11,6 +11,11 @@ jobs:
     container: 
       image: archlinux:base-devel 
     steps:
+      # - name: prepare
+      #   run: |
+      #     pacman -Syu --noconfirm sudo
+      #     useradd -m runner
+      #     echo "runner ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
     #   - name: cleanup
     #     run: |
     #       sudo mkdir /empty -p
@@ -26,5 +31,4 @@ jobs:
     #       )
     #       echo ${_files[@]} | sudo xargs -n1 rsync -a --delete /empty/
       - name: Debugging with ssh
-
-        uses: memchr/action-upterm@v0.1
+        uses: memchr/action-upterm@v0.2
