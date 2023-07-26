@@ -7,8 +7,18 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    container: 
+        image: archlinux:base-devel
     steps:
-      - name: disk capacity
+      - name: prepare
         run: |
-          df -h
+          pacman -Sy archlinux-keyring --needed --noconfirm
+          pacman -Syu --noconfirm
+          pacman -S dust
+      - name: disk capacity
+        run: df -h
+      - name: pwd
+        run: pwd
+      - name: dust
+        run: dust /
