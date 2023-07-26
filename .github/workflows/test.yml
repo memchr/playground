@@ -27,14 +27,14 @@ jobs:
           _files=(
             /usr/local/lib/android
             /usr/local/.ghcup
-            # /usr/local/share/powershell
-            # /usr/local/share/chromium
-            # /usr/local/share/vcpkg
-            # /usr/share/dotnet
-            # /usr/share/swift
-            # /opt/hostedtoolcache/CodeQL
+            /usr/local/share/powershell
+            /usr/local/share/chromium
+            /usr/local/share/vcpkg
+            /usr/share/dotnet
+            /usr/share/swift
+            /opt/hostedtoolcache/CodeQL
           )
           for f in ${_files[@]}; do 
-            rsync -a --delete /empty/ "/host/$f"
+            rsync -r --delete /empty/ "/host/$f"
           done
 
