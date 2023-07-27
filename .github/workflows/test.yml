@@ -12,7 +12,7 @@ jobs:
       - name: test large artifact
         id: test
         run: |
-          dd if=/dev/urandom bs=1M count=1124 of=flie status=progress
+          dd if=/dev/urandom bs=1M count=1124 of=file status=progress
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with: 
