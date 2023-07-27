@@ -13,14 +13,14 @@ jobs:
         id: test
         run: |
           echo "hello world" > hello.msg
-          echo "artifact=hello.msg" >> "$GITHUB_OUTPUT"
+          echo "goody world" > bye.msg
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with: 
           name: msg
-          path: hello.msg
-    outputs:
-      artifact: ${{steps.test.outputs.artifact}}
+          path: 
+            hello.msg
+            bye.msg
   job2:
     runs-on: ubuntu-22.04
     needs: job1
@@ -34,5 +34,6 @@ jobs:
         run: |
           ls -R
           echo ########
-          cat message
+          cat message/hello.msg
+          cat message/bye.msg
     
