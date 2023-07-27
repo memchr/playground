@@ -9,14 +9,27 @@ jobs:
   job1:
     runs-on: ubuntu-22.04
     steps:
-      - name: test large artifact
+      - name: generate artifact
         id: test
         run: |
-          dd if=/dev/urandom bs=1M count=1124 of=file status=progress
+          echo "hello world" > hello.msg
+          echo "goody world" > bye.msg
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with: 
-          retention-days: 1
-          name: test_large_file
+          name: msg
           path: |
-            file
+            hello.msg
+            bye.msg
+  job2:
+    runs-on: ubuntu-22.04
+    needs: job1
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: msg
+      - name: display artifact
+        run: |
+          ls -R
+    
