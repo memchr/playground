@@ -4,22 +4,18 @@ on:
     paths:
       - ".github/workflows/test.yml"
   workflow_dispatch:
-    inputs:
-      var1:
-        type: boolean
-        description: test variable 1
-        required: false
-        default: false
 
 jobs:
-  clean_up_test:
+  job1:
     runs-on: ubuntu-22.04
     steps:
       - name: test
         run: |
-          if [[ -n "${{inputs.var1}}" ]]; then
-            echo input var is not empty
-            echo ${{ inputs.var1 }}
-          else
-            echo input var is empty
-          fi
+          echo "var=hello" >> "$GITHUB_OUTPUT"
+  job2:
+    runs-on: ubuntu-22.04
+    needs: job1
+    steps:
+      - name: test output
+        run: |
+          echo var is ${{needs.job1.outputs.var}}
