@@ -16,9 +16,9 @@ jobs:
     steps:
       - name: test
         run: |
-          if [[ -n {{input.var1}} ]]; then
+          if [[ -n ${{inputs.var1}} ]]; then
             echo input var is not empty
-            echo {{ input.var1 }}
+            echo ${{ inputs.var1 }}
           else
             echo input var is empty
           fi
