@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: test
+        id: test
         run: |
           echo "handle=hello" >> "$GITHUB_OUTPUT"
+    outputs:
+      handle: ${{steps.test.outputs.handle}}
   job2:
     runs-on: ubuntu-22.04
     needs: job1
