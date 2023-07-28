@@ -1,0 +1,12 @@
+name: callee
+on:
+  push:
+    paths:
+      - ".github/workflows/caller.yml"
+  workflow_dispatch:
+
+jobs:
+  call_workflow:
+    uses: ./.github/workflows/test.yml
+    with:
+      rebuild: extra
