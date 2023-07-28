@@ -21,3 +21,4 @@ jobs:
           ls -R
           cat file
           echo bump
+          echo bump
