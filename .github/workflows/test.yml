@@ -4,20 +4,25 @@ on:
     paths:
       - ".github/workflows/test.yml"
   workflow_dispatch:
-  
+  workflow_call:
+    inputs:
+      rebuild:
+        required: true
+        type: string
+        default: full
+        description: |
+          - full: rebuild kernel and extra modules
+
+          - extra: rebuild only extra modules for the latest released kernel
+          
 permissions:
   contents: write
   actions: write
 
 jobs:
-  check_:
+  test:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: set variable
+      - name: print input
         run: |
-          echo TEST1=content2 >> "${GITHUB_ENV}"
-      - name: test variables
-        shell: bash
-        run: |
-          echo ${{ vars.TEST1 }}
+          echo "input=\"${{inputs.rebuild}}\""
