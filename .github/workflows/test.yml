@@ -26,6 +26,7 @@ jobs:
       - run: |
           echo "input=\"${{inputs.rebuild}}\""
           echo output > file
+          echo bump test 4
       - uses: actions/upload-artifact@v3
         with:
           name: file
