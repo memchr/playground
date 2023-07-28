@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: set variable
+        run: |
+          echo TEST1=content2 >> "${GITHUB_ENV}"
       - name: test variables
         shell: bash
         run: |
