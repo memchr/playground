@@ -9,21 +9,30 @@ jobs:
   job1:
     runs-on: ubuntu-22.04
     steps:
+      - name: restore cache
+        uses: actions/cache/restore@v3
+        with:
+          path: cache_file
+          key: cache1
       - name: init
         shell: bash
         run: |
-          echo "hello world" > cache_file
-      # - name: restore cache
-      #   uses: actions/cache/restore@v3
-      #   with:
-      #     path: cache_file
-      #     key: cache1
-
+          echo "goodbye world" > cache_file
+          
+      - name: delete cache
+        shell: bash
+        run: |
+          curl \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -X DELETE \
+          "https://api.github.com/repos/memchr/playground/actions/caches?key=cache1"
+      
       - name: create cache
         uses: actions/cache/save@v3
         with:
           path: cache_file
           key: cache1
-      # - name: delete cache
+
         
-      
+    
