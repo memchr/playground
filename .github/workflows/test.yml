@@ -14,7 +14,7 @@ on:
           - full: update pkgver and rebuild kernel and extra modules 
           - extra: rebuild only extra modules for the latest released kernel
 # The build workflow has three build types
-# - tagged build, 
+# - tagged build,  
 permissions:
   contents: write
   actions: write
