@@ -9,28 +9,11 @@ jobs:
   job1:
     runs-on: ubuntu-22.04
     steps:
-      - name: generate artifact
-        id: test
+      - name: input
+        id: step_input
         run: |
-          echo "hello world" > hello.msg
-          mkdir goodbye
-          echo "goody world" > goodbye/bye.msg
-      - name: upload artifact
-        uses: actions/upload-artifact@v3
-        with: 
-          name: msg
-          path: |
-            hello.msg
-            goodbye/bye.msg
-  job2:
-    runs-on: ubuntu-22.04
-    needs: job1
-    steps:
-      - name: download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: msg
-      - name: display artifact
-        run: |
-          ls -R
-    
+          echo var=hello > ${GITHUB_OUTPUT}
+      - name: output
+        id: step_output
+        run:
+          echo ${{steps.step_input.outputs.var}}
