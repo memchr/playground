@@ -22,24 +22,24 @@ jobs:
         run: |
           echo "goodbye world" > cache_file
           
-      # - name: delete cache
-      #   shell: bash
-      #   run: |
-      #     curl \
-      #     -H "Accept: application/vnd.github.v3+json" \
-      #     -H "Authorization: token $GITHUB_TOKEN" \
-      #     -X DELETE \
-      #     "https://api.github.com/repos/${{ github.repository }}/actions/caches?key=$CACHE_KEY"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     CACHE_KEY: cache1
-      - name: Remove old  cache
+      - name: delete cache
         shell: bash
         run: |
-          curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $GITHUB_TOKEN" -X DELETE "https://api.github.com/repos/${{ github.repository }}/actions/caches?key=$CACHE_KEY"
+          curl \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -X DELETE \
+          "https://api.github.com/repos/${{ github.repository }}/actions/caches?key=$CACHE_KEY"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CACHE_KEY: cache1
+      # - name: Remove old  cache
+      #   shell: bash
+      #   run: |
+      #     curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $GITHUB_TOKEN" -X DELETE "https://api.github.com/repos/${{ github.repository }}/actions/caches?key=$CACHE_KEY"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     CACHE_KEY: cache1
 
       
       - name: create cache
