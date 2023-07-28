@@ -9,11 +9,21 @@ jobs:
   job1:
     runs-on: ubuntu-22.04
     steps:
-      - name: input
-        id: step_input
+      - name: init
+        shell: bash
         run: |
-          echo var=hello > ${GITHUB_OUTPUT}
-      - name: output
-        id: step_output
-        run:
-          echo ${{steps.step_input.outputs.var}}
+          echo "hello world" > cache_file
+      # - name: restore cache
+      #   uses: actions/cache/restore@v3
+      #   with:
+      #     path: cache_file
+      #     key: cache1
+
+      - name: create cache
+        uses: actions/cache/save@v3
+        with:
+          path: cache_file
+          key: cache1
+      # - name: delete cache
+        
+      
