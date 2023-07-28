@@ -13,14 +13,15 @@ jobs:
         id: test
         run: |
           echo "hello world" > hello.msg
-          echo "goody world" > bye.msg
+          mkdir goodbye
+          echo "goody world" > goodbye/bye.msg
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with: 
           name: msg
           path: |
             hello.msg
-            bye.msg
+            goodbye/bye.msg
   job2:
     runs-on: ubuntu-22.04
     needs: job1
