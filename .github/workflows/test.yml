@@ -23,8 +23,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "github.env====="
-          echo "${{ github.env }}"
-          echo "GITHUB_ENV====="
-          echo "${GITHUB_ENV}"
+      - name: github env test
+        run: |
+          echo 'test_var_1="test via GITHUB_ENV"' >> "${GITHUB_ENV}"
+          echo 'test_var_2="test via github.env"' >> "${{github.env}}"
+      - name: get env
+        run: |
+          echo ${{env.test_var_1}}
+          echo ${{env.test_var_2}}
+          
