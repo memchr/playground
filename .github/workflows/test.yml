@@ -24,10 +24,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "input=\"${{inputs.rebuild}}\""
-          echo output > file
-          echo bump test 4
-      - uses: actions/upload-artifact@v3
-        with:
-          name: file
-          path: file
+          echo ${{ github }}
