@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - ".github/workflows/test.yml"
+      
   workflow_dispatch:
   workflow_call:
     inputs:
