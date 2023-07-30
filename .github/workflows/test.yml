@@ -2,8 +2,8 @@ name: test
 on:
   push:
     paths:
-      - ".github/workflows/test.yml"
-      
+      - ".github/*"
+
   workflow_dispatch:
   workflow_call:
     inputs:
