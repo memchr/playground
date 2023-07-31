@@ -5,19 +5,14 @@ on:
       - ".github/**"
   workflow_dispatch:
   workflow_call:
-    inputs:
-      rebuild:
-        required: true
-        type: string
-        default: full
-        description: |
-          - full: update pkgver and rebuild kernel and extra modules 
-          - extra: rebuild only extra modules for the latest released kernel
-# The build workflow has three build types
-# - tagged build,  
+
 permissions:
   contents: write
   actions: write
+  
+defaults:
+  run:
+    shell: bash
 
 jobs:
   test:
@@ -31,4 +26,6 @@ jobs:
         run: |
           echo ${{env.test_var_1}}
           echo ${{env.test_var_2}}
-          
+          echo ${{env.step_env}}
+        env:
+          step_env: test via steps[].env
