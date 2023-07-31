@@ -13,7 +13,8 @@ permissions:
 defaults:
   run:
     shell: bash
-
+env:
+  artifact_name: linux-clang
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -27,5 +28,10 @@ jobs:
           echo ${{env.test_var_1}}
           echo ${{env.test_var_2}}
           echo ${{env.step_env}}
+          echo ${{env.artifact_name}}
         env:
           step_env: test via steps[].env
+      - name: download non-existent artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: non_existent
