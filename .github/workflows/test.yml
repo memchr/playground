@@ -19,19 +19,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: github env test
-        run: |
-          echo 'test_var_1="test via GITHUB_ENV"' >> "${GITHUB_ENV}"
-          echo 'test_var_2="test via github.env"' >> "${{github.env}}"
-      - name: get env
-        run: |
-          echo ${{env.test_var_1}}
-          echo ${{env.test_var_2}}
-          echo ${{env.step_env}}
-          echo ${{env.artifact_name}}
-        env:
-          step_env: test via steps[].env
-      - name: download non-existent artifact
-        uses: actions/download-artifact@v3
+      - run: touch file
+      - name: Create release
+        uses: softprops/action-gh-release@v1
         with:
-          name: non_existent
+          files: 'file'
+          tag_name: 6.4.7.arch1-1 1690905259
