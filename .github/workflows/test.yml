@@ -24,4 +24,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: 'file'
-          tag_name: 6.4.7.arch1-1 1690905259
+          tag_name: 6.4.7.arch1-1:1690905259
