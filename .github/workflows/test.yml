@@ -19,7 +19,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: touch file
+      - run: echo hello > file
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
